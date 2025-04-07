@@ -1,15 +1,15 @@
 import './App.css';
+import Home from './components/Home.jsx';
 import Greeting from './Greeting.jsx';
 
-function App() {
+const App = () => {
 
   return (
     <>
       <h1>My App</h1>
-      <Greeting name="Joni" />
+      <Home />
     </>
   );
-}
+};
 
-
-export default App
+export default App;
