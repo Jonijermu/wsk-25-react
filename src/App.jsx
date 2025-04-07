@@ -6,7 +6,7 @@ function App() {
   return (
     <>
       <h1>My App</h1>
-      <Greeting name="Joni"/>
+      <Greeting name="Joni" />
     </>
   );
 }
