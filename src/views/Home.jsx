@@ -39,9 +39,17 @@ import MediaRow from '../components/MediaRow.jsx';
 import {useState} from 'react';
 import SingleView from '../components/SingleView.jsx';
 
+
 const Home = () => {
   const [selectedItem, setSelectedItem] = useState(null);
   console.log('selectedItem', selectedItem);
+  const [mediaArray, setMediaArray] = useState([]);
+  const getMedia = async() =>{
+    const json = await fetchData('test.json');
+    setMediaArray(json);
+  }
+  getMedia()
+  console.log(mediaArray)
   return (
     <>
       <h2>My Media</h2>
