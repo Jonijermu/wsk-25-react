@@ -8,7 +8,7 @@ const SingleView = (props) => {
     <>
       {item && (
         <dialog open>
-          <button onClick={handleClick}>&#10005;</button>
+          <button onClick={handleClick}>&#10005; </button>
           {item.media_type.includes('video') ? (
             <video src={item.filename} controls />
           ) : (
