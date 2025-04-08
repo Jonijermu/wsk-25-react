@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 const SingleView = (props) => {
   const {item, setSelectedItem} = props;
 
@@ -21,6 +23,11 @@ const SingleView = (props) => {
     </>
 
   );
+};
+
+SingleView.prototype = {
+  item: PropTypes.object.isRequired,
+  setSelectedItem: PropTypes.func.isRequired
 };
 
 export default SingleView;
