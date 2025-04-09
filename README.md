@@ -1,3 +1,5 @@
+Open [Assignment](https://users.metropolia.fi/~jonijhe/web_development_K25/React/hooks/) to view it in the browser.
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
