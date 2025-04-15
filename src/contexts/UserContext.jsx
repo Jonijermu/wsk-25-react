@@ -21,7 +21,7 @@ const UserProvider = ({children}) => {
       // TODO: set user to state
       setUser(loginResult.user)
       // TODO: navigate to home
-      navigate(location.pathname)
+      navigate('/')
   };
 
   const handleLogout = () => {
@@ -52,13 +52,15 @@ const UserProvider = ({children}) => {
         navigate(location.pathname);
       }
     } catch (e) {
+      handleLogout();
       console.log(e.message);
     }
   };
 
   return (
     <UserContext.Provider
-      value={{user, handleLogin, handleLogout, handleAutoLogin}}>
+      value={{user, handleLogin, handleLogout, handleAutoLogin}}
+    >
       {children}
     </UserContext.Provider>
   );

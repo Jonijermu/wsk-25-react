@@ -1,6 +1,6 @@
 import {fetchData} from '../utils/fetchData.js';
 import {uniqBy} from 'lodash';
-import {useEffect, useState} from 'react';
+import {useCallback, useEffect, useState} from 'react';
 
 const useMedia = () => {
   const [mediaArray, setMediaArray] = useState([]);
@@ -74,7 +74,7 @@ const useUser = () => {
       fetchOptions);
   };
 
-  const getUserByToken = async (token) => {
+  const getUserByToken = useCallback(async (token) => {
     const fetchOptions = {
       headers: {
         Authorization: 'Bearer: ' + token
@@ -83,13 +83,13 @@ const useUser = () => {
 
     const userResult = await fetchData(
       import.meta.env.VITE_AUTH_API + '/users/token',
-      fetchOptions);
-
-    console.log(userResult);
+      fetchOptions
+  );
+    console.log('userResult', userResult);
 
     return userResult;
 
-  };
+  }, []);
 
   return {getUserByToken, postUser};
 };
