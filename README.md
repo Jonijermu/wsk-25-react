@@ -1,4 +1,4 @@
-Open [Assignment](https://users.metropolia.fi/~jonijhe/web_development_K25/React/custom-hooks/) to view it in the browser.
+Open [Assignment](https://users.metropolia.fi/~jonijhe/web_development_K25/React/forms/) to view it in the browser.
 
 # React + Vite
 
