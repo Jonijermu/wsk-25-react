@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import {useUser} from '../hooks/apiHooks.js';
 
 const Profile = () => {
@@ -14,8 +14,9 @@ const Profile = () => {
         setUser(userResult.user);
       }
     };
-    fetchUser()
-  }, []);
+
+    fetchUser();
+  }, [getUserByToken]);
 
   console.log('user', user);
   return (
