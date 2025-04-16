@@ -8,7 +8,7 @@ const useMedia = () => {
   const getMedia = async () => {
     try {
       const mediaData = await fetchData(
-        import.meta.env.VITE_MEDIA_API + '/media'
+        import.meta.env.VITE_MEDIA_API + '/media',
       );
 
       const uniqueUserIds = uniqBy(mediaData, 'user_id');
@@ -20,8 +20,8 @@ const useMedia = () => {
       const userData = await Promise.all(
         uniqueUserIds.map(
           async (item) =>
-            await fetchData(`${authApiUrl}/users/${item.user_id}`)
-        )
+            await fetchData(`${authApiUrl}/users/${item.user_id}`),
+        ),
       );
 
       console.log('userData', userData);
@@ -40,7 +40,27 @@ const useMedia = () => {
   useEffect(() => {
     getMedia();
   }, []);
-  return {mediaArray};
+
+  const postMedia = async (file, inputs, token) => {
+    const data = {
+      ...inputs,
+      ...file,
+    };
+    const fetchOptions = {
+      method: 'POST',
+      headers: {
+        Authorization: 'Bearer ' + token,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    };
+
+    return await fetchData(
+      import.meta.env.VITE_MEDIA_API + '/media',
+      fetchOptions,
+    );
+  };
+  return {mediaArray, postMedia};
 };
 
 const useAuthentication = () => {
@@ -48,14 +68,14 @@ const useAuthentication = () => {
     const fetchOptions = {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify(inputs)
+      body: JSON.stringify(inputs),
     };
     return await fetchData(
       import.meta.env.VITE_AUTH_API + '/auth/login',
-      fetchOptions);
-
+      fetchOptions,
+    );
   };
   return {postLogin};
 };
@@ -65,33 +85,55 @@ const useUser = () => {
     const fetchOptions = {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify(inputs)
+      body: JSON.stringify(inputs),
     };
     return await fetchData(
       import.meta.env.VITE_AUTH_API + '/users/',
-      fetchOptions);
+      fetchOptions,
+    );
   };
 
   const getUserByToken = useCallback(async (token) => {
     const fetchOptions = {
       headers: {
-        Authorization: 'Bearer: ' + token
-      }
+        Authorization: 'Bearer: ' + token,
+      },
     };
 
     const userResult = await fetchData(
       import.meta.env.VITE_AUTH_API + '/users/token',
-      fetchOptions
-  );
+      fetchOptions,
+    );
     console.log('userResult', userResult);
 
     return userResult;
-
   }, []);
 
   return {getUserByToken, postUser};
 };
 
-export {useMedia, useAuthentication, useUser};
+const useFile = () => {
+  const postFile = async (file, token) => {
+    const formData = new FormData();
+    formData.append('file', file);
+
+    const fetchOptions = {
+      method: 'POST',
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
+      mode: 'cors',
+      body: formData,
+    };
+
+    return await fetchData(
+      import.meta.env.VITE_UPLOAD_SERVER + '/upload',
+      fetchOptions,
+    );
+  };
+  return {postFile};
+};
+
+export {useMedia, useAuthentication, useUser, useFile};
