@@ -94,4 +94,24 @@ const useUser = () => {
   return {getUserByToken, postUser};
 };
 
-export {useMedia, useAuthentication, useUser};
+const useFile = () => {
+  const postFile = async (file, token) => {
+    const formData = new FormData();
+    formData.append('file', file);
+    const fetchOptions = {
+      method: 'POST',
+      headers: {
+        Authorization: 'Bearer ' + token
+      },
+      mode: 'cors',
+      body: formData
+    };
+    return await fetchData(
+      import.meta.env.VITE_UPLOAD_SERVER + '/upload',
+      fetchOptions
+    );
+  };
+  return {postFile};
+};
+
+export {useMedia, useAuthentication, useUser, useFile};

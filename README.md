@@ -1,4 +1,4 @@
-Open [Assignment](https://users.metropolia.fi/~jonijhe/web_development_K25/React/context/) to view it in the browser.
+Open [Assignment]() to view it in the browser.
 
 # React + Vite
 
