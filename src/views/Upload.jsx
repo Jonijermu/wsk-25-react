@@ -1,28 +1,28 @@
 import useForm from '../hooks/formHooks.js';
 import {useState} from 'react';
-import {useFile} from '../hooks/apiHooks.js';
+import {useFile, useMedia} from '../hooks/apiHooks.js';
 import {useNavigate} from 'react-router';
 
 const Upload = () => {
   const [file, setFile] = useState(null);
-  const {postFile} = useFile;
+  const {postFile} = useFile();
   const navigate = useNavigate();
+  const {postMedia} = useMedia();
 
   const doUpload = async () => {
     try {
       const token = localStorage.getItem('token');
-      const fileResult = postFile(file, token);
-      console.log('result', fileResult);
-      // TODO: call postMedia function (see below)
-
-      // TODO: redirect to Home
-      navigate('/')
+      const fileResult = await postFile(file, token);
+      console.log('file result', fileResult);
+      const mediaResult = await postMedia(fileResult.data, inputs,token);
+      console.log('Media result', mediaResult);
+      navigate('/');
     } catch (e) {
       console.log(e.message);
     }
   };
 
-  const {inputs, handleInputChange, handleSubmit} = useForm(doUpload());
+  const {inputs, handleInputChange, handleSubmit} = useForm(doUpload);
 
   const handleFileChange = (evt) => {
     if (evt.target.files) {
@@ -67,7 +67,7 @@ const Upload = () => {
           src={
             file
               ? URL.createObjectURL(file)
-              : 'https://via.placeholder.com/200?text=Choose+image'
+              : 'https://placehold.co/600x400?text=Choose+image'
           }
           alt="preview"
           width="200"
