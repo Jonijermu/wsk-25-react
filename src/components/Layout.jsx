@@ -12,27 +12,37 @@ const Layout = () => {
   return (
     <div>
       <header>
-        <h1>My App</h1>
+        <h1 className=" text-3xl" >My App</h1>
         <nav>
-          <ul>
+          <ul className=" flex overflow-hidden justify-end bg-stone-900">
             <li>
-              <Link to="/">Home</Link>
+              <Link
+                className="block p-4 text-center text-stone-50 hover:bg-stone-600"
+                to="/">Home</Link>
             </li>
             {user ? (
               <>
                 <li>
-                  <Link to="/profile">Profile</Link>
+                  <Link
+                    className="block p-4 text-center text-stone-50 hover:bg-stone-600"
+                    to="/profile">Profile</Link>
                 </li>
                 <li>
-                  <Link to="/upload">Upload</Link>
+                  <Link
+                    className="block p-4 text-center text-stone-50 hover:bg-stone-600"
+                    to="/upload">Upload</Link>
                 </li>
                 <li>
-                  <Link to="/logout">Logout</Link>
+                  <Link
+                    className="block p-4 text-center text-stone-50 hover:bg-stone-600"
+                    to="/logout">Logout</Link>
                 </li>
               </>
             ) : (
               <li>
-                <Link to="/login">Login</Link>
+                <Link
+                  className="block p-4 text-center text-stone-50 hover:bg-stone-600"
+                  to="/login">Login</Link>
               </li>
             )}
           </ul>
