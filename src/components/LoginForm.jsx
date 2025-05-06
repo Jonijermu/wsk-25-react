@@ -1,12 +1,13 @@
 import useForm from '../hooks/formHooks.js';
 import {useUserContext} from '../hooks/contextHooks';
+import TextInput from './ui/TextInput.jsx';
 
 const LoginForm = () => {
   const {handleLogin} = useUserContext();
 
   const initValues = {
     username: '',
-    password: ''
+    password: '',
   };
   const doLogin = async () => {
     try {
@@ -16,33 +17,31 @@ const LoginForm = () => {
     }
   };
 
-  const {inputs, handleInputChange, handleSubmit} = useForm(doLogin,
-    initValues);
+  const {inputs, handleInputChange, handleSubmit} = useForm(
+    doLogin,
+    initValues,
+  );
 
   return (
     <>
       <h1>Login</h1>
       <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="loginuser">Username</label>
-          <input
-            name="username"
-            type="text"
-            id="loginuser"
-            onChange={handleInputChange}
-            autoComplete="username"
-          />
-        </div>
-        <div>
-          <label htmlFor="loginpassword">Password</label>
-          <input
-            name="password"
-            type="password"
-            id="loginpassword"
-            onChange={handleInputChange}
-            autoComplete="current-password"
-          />
-        </div>
+        <TextInput
+          label="Username"
+          onChange={handleInputChange}
+          autoComplete="username"
+          type="text"
+          id="loginuser"
+          name="username"
+        />
+        <TextInput
+          label="password"
+          name="password"
+          type="password"
+          id="loginpassword"
+          onChange={handleInputChange}
+          autoComplete="current-password"
+        />
         <button type="submit">Login</button>
       </form>
     </>

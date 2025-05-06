@@ -14,7 +14,7 @@ const Upload = () => {
       const token = localStorage.getItem('token');
       const fileResult = await postFile(file, token);
       console.log('file result', fileResult);
-      const mediaResult = await postMedia(fileResult.data, inputs,token);
+      const mediaResult = await postMedia(fileResult.data, inputs, token);
       console.log('Media result', mediaResult);
       navigate('/');
     } catch (e) {

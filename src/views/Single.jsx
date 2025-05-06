@@ -7,9 +7,7 @@ const Single = () => {
   const navigate = useNavigate();
   return (
     <>
-      <button onClick={() => navigate(-1)}>
-        Go back
-      </button>
+      <button onClick={() => navigate(-1)}>Go back</button>
       {item.media_type.includes('video') ? (
         <video src={item.filename} controls />
       ) : (

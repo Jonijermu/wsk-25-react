@@ -63,7 +63,11 @@ const useMedia = () => {
   return {mediaArray, postMedia};
 };
 
+const tokenExistsInLocalstorage = () => Boolean(localStorage.getItem('token'));
+
 const useAuthentication = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(tokenExistsInLocalstorage());
+
   const postLogin = async (inputs) => {
     const fetchOptions = {
       method: 'POST',
@@ -76,8 +80,17 @@ const useAuthentication = () => {
       import.meta.env.VITE_AUTH_API + '/auth/login',
       fetchOptions,
     );
+
+    console.log('loginResult', loginResult.token);
+
+    window.localStorage.setItem('token', loginResult.token);
+
+    setIsLoggedIn(tokenExistsInLocalstorage());
+
+    return loginResult;
   };
-  return {postLogin};
+
+  return {postLogin, isLoggedIn};
 };
 
 const useUser = () => {
